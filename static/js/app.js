@@ -46,7 +46,7 @@ function updateFilters() {
       filters[filterId] = elementValue;
     }
     else {
-      delete filters[filterId]
+      delete filters[filterId];
     }
   
     // 6. Call function to apply all filters and rebuild the table
@@ -62,11 +62,10 @@ function updateFilters() {
   
     // 9. Loop through all of the filters and keep any data that
     // matches the filter values
-    for (i = 0; i < filters.length; i++) {
-      filteredData = filteredData.filter(row => row.filterId === elementValue);
-    }
-      
-  
+    Object.entries(filters).forEach(([filterId, elementValue]) => {
+      filteredData = filteredData.filter(row => row[filterId] === elementValue);
+    });
+    
     // 10. Finally, rebuild the table using the filtered data
     buildTable(filteredData);
   }
